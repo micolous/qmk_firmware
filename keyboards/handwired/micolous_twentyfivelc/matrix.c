@@ -80,9 +80,7 @@ void matrix_init(void)
     LED_ON();
     wait_ms(500);
     LED_OFF();
-#ifdef STENO_ENABLE
-    matrix_init_user();
-#endif
+
 }
 
 uint8_t matrix_scan(void)
