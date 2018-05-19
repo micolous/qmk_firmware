@@ -871,7 +871,7 @@ bool recv_midi_packet(MIDI_EventPacket_t* const event) {
 
 void virtser_send(const uint8_t byte) {
   // This hangs forever???
-  chnWrite(&drivers.serial_driver.driver, &byte, 1);
+  //chnWrite(&drivers.serial_driver.driver, &byte, 1);
 }
 
 __attribute__ ((weak))
