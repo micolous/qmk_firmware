@@ -870,6 +870,7 @@ bool recv_midi_packet(MIDI_EventPacket_t* const event) {
 #ifdef VIRTSER_ENABLE
 
 void virtser_send(const uint8_t byte) {
+  // This hangs forever???
   chnWrite(&drivers.serial_driver.driver, &byte, 1);
 }
 

@@ -26,14 +26,21 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {STN_SL,  STN_TL, STN_PL, STN_HL, STN_A, STN_E, STN_FR, STN_PR, STN_LR, STN_TR, STN_DR},
         {STN_STR, STN_KL, STN_WL, STN_RL, STN_O, STN_U, STN_RR, STN_BR, STN_GR, STN_SR, STN_ZR},
     },
-#else
+#endif
     {
 		{KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC},
 		{KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT},
 		//{KC_Z, KC_X, KC_C, KC_V}
-	}, // test with KC_CAPS, KC_A, RESET
-#endif
+	 }, // test with KC_CAPS, KC_A, RESET
 };
 
 const uint16_t fn_actions[] = {
 };
+
+
+void matrix_init_user() {
+#ifdef STENO_ENABLE
+    steno_set_mode(STENO_MODE_BOLT);
+#endif
+}
+

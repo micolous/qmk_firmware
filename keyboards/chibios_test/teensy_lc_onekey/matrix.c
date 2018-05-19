@@ -26,9 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "util.h"
 #include "matrix.h"
 #include "wait.h"
-#ifdef STENO_ENABLE
-#include "process_steno.h"
-#endif
 
 #ifndef DEBOUNCE
 #   define DEBOUNCE 5
@@ -74,17 +71,16 @@ void matrix_init(void)
     }
 
     //debug
-    debug_matrix = true;
+    //debug_matrix = true;
     LED_ON();
     wait_ms(500);
     LED_OFF();
-#ifdef STENO_ENABLE
-    steno_set_mode(STENO_MODE_BOLT);
-#endif
 }
 
 uint8_t matrix_scan(void)
 {
+    bool has_keys = false;
+
     for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
         select_row(i);
         wait_us(30);  // without this wait read unstable value.
@@ -105,8 +101,17 @@ uint8_t matrix_scan(void)
         } else {
             for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
                 matrix[i] = matrix_debouncing[i];
+                if (matrix[i] != 0) {
+                    has_keys = true;
+                }
             }
         }
+    }
+    
+    if (has_keys) {
+        LED_ON();
+    } else {
+        LED_OFF();
     }
 
     return 1;
