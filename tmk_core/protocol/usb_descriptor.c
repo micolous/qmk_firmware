@@ -47,6 +47,7 @@
 /*******************************************************************************
  * HID Report Descriptors
  ******************************************************************************/
+#ifndef KEYBOARD_DISABLE
 const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] =
 {
     HID_RI_USAGE_PAGE(8, 0x01), /* Generic Desktop */
@@ -85,6 +86,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] =
         HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_ARRAY | HID_IOF_ABSOLUTE),
     HID_RI_END_COLLECTION(0),
 };
+#endif
 
 #ifdef MOUSE_ENABLE
 const USB_Descriptor_HIDReport_Datatype_t PROGMEM MouseReport[] =
@@ -303,6 +305,7 @@ const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor =
     /*
      * Keyboard
      */
+#ifndef KEYBOARD_DISABLE
     .Keyboard_Interface =
         {
             .Header                 = {.Size = sizeof(USB_Descriptor_Interface_t), .Type = DTYPE_Interface},
@@ -339,6 +342,7 @@ const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor =
             .EndpointSize           = KEYBOARD_EPSIZE,
             .PollingIntervalMS      = 0x0A
         },
+#endif
 
     /*
      * Mouse
@@ -936,10 +940,12 @@ uint16_t get_usb_descriptor(const uint16_t wValue,
             break;
         case HID_DTYPE_HID:
             switch (wIndex) {
+#ifndef KEYBOARD_DISABLE
             case KEYBOARD_INTERFACE:
                 Address = &ConfigurationDescriptor.Keyboard_HID;
                 Size    = sizeof(USB_HID_Descriptor_HID_t);
                 break;
+#endif
 #ifdef MOUSE_ENABLE
             case MOUSE_INTERFACE:
                 Address = &ConfigurationDescriptor.Mouse_HID;
@@ -974,10 +980,12 @@ uint16_t get_usb_descriptor(const uint16_t wValue,
             break;
         case HID_DTYPE_Report:
             switch (wIndex) {
+#ifndef KEYBOARD_DISABLE
             case KEYBOARD_INTERFACE:
                 Address = &KeyboardReport;
                 Size    = sizeof(KeyboardReport);
                 break;
+#endif
 #ifdef MOUSE_ENABLE
             case MOUSE_INTERFACE:
                 Address = &MouseReport;

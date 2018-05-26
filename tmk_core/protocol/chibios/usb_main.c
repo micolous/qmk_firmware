@@ -309,7 +309,9 @@ static void usb_event_cb(USBDriver *usbp, usbevent_t event) {
   case USB_EVENT_CONFIGURED:
     osalSysLockFromISR();
     /* Enable the endpoints specified into the configuration. */
+#ifndef KEYBOARD_DISABLE
     usbInitEndpointI(usbp, KEYBOARD_IN_EPNUM, &kbd_ep_config);
+#endif
 #ifdef MOUSE_ENABLE
     usbInitEndpointI(usbp, MOUSE_IN_EPNUM, &mouse_ep_config);
 #endif /* MOUSE_ENABLE */
@@ -872,6 +874,8 @@ bool recv_midi_packet(MIDI_EventPacket_t* const event) {
 void virtser_send(const uint8_t byte) {
   // This hangs forever???
   //chnWrite(&drivers.serial_driver.driver, &byte, 1);
+  chnWriteTimeout(&drivers.serial_driver.driver, &byte, 1, TIME_IMMEDIATE);
+
 }
 
 __attribute__ ((weak))

@@ -53,10 +53,12 @@ typedef struct
 {
     USB_Descriptor_Configuration_Header_t Config;
 
+#ifndef KEYBOARD_DISABLE
     // Keyboard HID Interface
     USB_Descriptor_Interface_t            Keyboard_Interface;
     USB_HID_Descriptor_HID_t              Keyboard_HID;
     USB_Descriptor_Endpoint_t             Keyboard_INEndpoint;
+#endif
 
 #ifdef MOUSE_ENABLE
     // Mouse HID Interface
