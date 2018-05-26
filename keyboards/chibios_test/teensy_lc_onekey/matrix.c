@@ -75,6 +75,7 @@ void matrix_init(void)
     LED_ON();
     wait_ms(500);
     LED_OFF();
+
 }
 
 uint8_t matrix_scan(void)
@@ -144,9 +145,10 @@ void matrix_print(void)
 static void  init_cols(void)
 {
     // internal pull-up
+    
     palSetPadMode(TEENSY_PIN0_IOPORT, TEENSY_PIN0, PAL_MODE_INPUT_PULLUP);
     palSetPadMode(TEENSY_PIN1_IOPORT, TEENSY_PIN1, PAL_MODE_INPUT_PULLUP);
-    palSetPadMode(TEENSY_PIN2_IOPORT, TEENSY_PIN2, PAL_MODE_INPUT_PULLUP);
+    palSetPadMode(TEENSY_PIN11_IOPORT, TEENSY_PIN11, PAL_MODE_INPUT_PULLUP);
     palSetPadMode(TEENSY_PIN3_IOPORT, TEENSY_PIN3, PAL_MODE_INPUT_PULLUP);
     palSetPadMode(TEENSY_PIN4_IOPORT, TEENSY_PIN4, PAL_MODE_INPUT_PULLUP);
     palSetPadMode(TEENSY_PIN5_IOPORT, TEENSY_PIN5, PAL_MODE_INPUT_PULLUP);
@@ -160,9 +162,10 @@ static void  init_cols(void)
 /* Returns status of switches(1:on, 0:off) */
 static matrix_row_t read_cols(void)
 {
-    return ((palReadPad(TEENSY_PIN0_IOPORT, TEENSY_PIN0)==PAL_HIGH) ? 0 : (1<<0))
+    return 0
+		| ((palReadPad(TEENSY_PIN0_IOPORT, TEENSY_PIN0)==PAL_HIGH) ? 0 : (1<<0))
 		| ((palReadPad(TEENSY_PIN1_IOPORT, TEENSY_PIN1)==PAL_HIGH) ? 0 : (1<<1))
-		| ((palReadPad(TEENSY_PIN2_IOPORT, TEENSY_PIN2)==PAL_HIGH) ? 0 : (1<<2))
+		| ((palReadPad(TEENSY_PIN11_IOPORT, TEENSY_PIN11)==PAL_HIGH) ? 0 : (1<<2))
 		| ((palReadPad(TEENSY_PIN3_IOPORT, TEENSY_PIN3)==PAL_HIGH) ? 0 : (1<<3))
 		| ((palReadPad(TEENSY_PIN4_IOPORT, TEENSY_PIN4)==PAL_HIGH) ? 0 : (1<<4))
 		| ((palReadPad(TEENSY_PIN5_IOPORT, TEENSY_PIN5)==PAL_HIGH) ? 0 : (1<<5))

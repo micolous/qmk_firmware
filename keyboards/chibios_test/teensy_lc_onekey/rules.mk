@@ -43,3 +43,10 @@ MCU  = cortex-m0plus
 # ARM version, CORTEX-M0/M1 are 6, CORTEX-M3/M4/M7 are 7
 # I.e. 6 for Teensy LC; 7 for Teensy 3.x
 ARMV = 6
+
+# This only works if there are symlinks in the directory `make` is run from
+# to chconf.h and halconf.h. This isn't a big issue, as normally the linker will
+# optimise out unused code, but it does make it a lot clearer what's actually
+# included in an image.
+#USE_SMART_BUILD = yes
+
