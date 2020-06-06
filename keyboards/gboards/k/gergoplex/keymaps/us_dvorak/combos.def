@@ -1,0 +1,15 @@
+// List any combo dictionaries you want loaded to 
+// your device below!
+
+#include "keymap_dvorak.h"
+#include "sendstring_dvorak.h"
+
+// QMK wide includes
+#include "combos/germ-vim-helpers-dvorak.def"
+#include "combos/germ-mouse-keys.def"
+
+// User includes
+#include "gergoplex.def"
+
+// Word completion
+#include "combos/eng-combos.def"
