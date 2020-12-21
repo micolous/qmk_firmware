@@ -21,7 +21,7 @@
  * or come up with improvements, please submit a PR!
  */
 
-
+/*
 // You can use the following aliases in your chords
 // AA, AS, AE, AT, AN, AI, AO, AP, AL, AR (Left/Right thumb)
 // NUM, USR and CMD are also available
@@ -46,3 +46,4 @@ SUBS(AR | AT | AN,									qf3, 		"Undefined Quick Fire ")
 SUBS(AR | AN | AI,									qf4, 		"Undefined Quick Fire ")
 SUBS(AR | AI | AO,									qf5, 		"Undefined Quick Fire ")
 SUBS(AR | AO | AP,									qf6, 		"Undefined Quick Fire ")
+*/

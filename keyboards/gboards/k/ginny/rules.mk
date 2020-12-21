@@ -12,9 +12,10 @@ MOUSEKEY_ENABLE     =   no
 EXTRAKEY_ENABLE     =   no
 CONSOLE_ENABLE      =   yes
 COMMAND_ENABLE      =   no
+MIDI_ENABLE         =   yes
 
 VPATH               +=  keyboards/gboards/ 
-SRC                 +=  matrix.c g/engine.c config_engine.c
+SRC                 +=  matrix.c
 QUANTUM_LIB_SRC     +=  i2c_master.c
 OPT_DEFS            +=  -DONLYQWERTY 
 LTO_ENABLE          =   yes
